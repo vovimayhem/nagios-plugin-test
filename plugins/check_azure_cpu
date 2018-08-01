@@ -1,0 +1,7 @@
+#! /bin/bash
+
+# echo "Everything is cool|=BLAH"
+# echo " - Very Cool |=BLOH"
+# exit 0
+# /subscriptions/991adb6c-6ce8-45a3-b90d-b9d5eeb4f11e/resourceGroups/Icalia-Foresight/providers/Microsoft.Compute/virtualMachines/foresight-public-01
+azure insights metrics list

@@ -1,0 +1,26 @@
+version: '2.1'
+
+services:
+
+  nagios:
+    image: icalialabs/nagios-azure-integration:development
+    build:
+      dockerfile: dev.Dockerfile
+      context: .
+    ports:
+      # By default, we'll bind our host's port 8080 to nagios' port 80, so it can be available to
+      # our browsers at http://localhost:8080/blah:
+      - ${NAGIOS_WEB_PORT:-8080}:80
+    volumes:
+      # Mount our development plugin scripts into Nagios:
+      # - ./plugins/check_azure_cpu:/opt/nagios/libexec/check_azure_cpu
+      - ./plugins:/opt/Custom-Nagios-Plugins
+
+      # Mount the project's nagios command config:
+      - ./config/project-commands.cfg:/opt/nagios/etc/conf.d/project-commands.cfg
+      #/tmp/nagioscore/sample-config/template-object/commands.cfg
+      #/orig/etc/objects/commands.cfg
+    stdin_open: true
+    tty: true
+    labels:
+      - "group=development"
